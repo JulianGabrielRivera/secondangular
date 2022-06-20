@@ -1,1 +1,13 @@
-<p>Server with ID {{ serverId }} is {{ getServerStatus() }}</p>
+<!-- buitl in directive, it is an attribute directive -->
+<!-- brackets  are not part of the directive name, they indicate we want to bind to some property on this directive -->
+<!-- we are using property binding to configure it -->
+<p
+  [ngStyle]="{
+    backgroundColor: getColor()
+  }"
+  [ngClass]="{ online: serverStatus === 'online' }"
+>
+  Server with ID {{ serverId }} is {{ getServerStatus() }}
+</p>
+
+<!-- ngClass only adds a css class if the certain condition is true -->

@@ -19,5 +19,40 @@
 >
   Add Server
 </button>
-<p [innerText]="allowNewServer"></p>
-<p>{{ serverCreationStatus }}</p>
+<!-- <p [innerText]="allowNewServer"></p>
+<p>{{ serverCreationStatus }}</p> -->
+<!-- for ngmodel to work we need to make sure we have formsmodule -->
+
+<input type="text" class="form-control" [(ngModel)]="username" />
+{{ username }}
+
+<button
+  class="btn btn-primary"
+  (click)="onUpdateUserName()"
+  [disabled]="username === ''"
+>
+  Empty
+</button>
+<!-- ngif = directive structural directive so we need the * it means it changes the structure of our element-->
+<!-- this also adds an element to the dom, if not it removes it or is not there -->
+<p *ngIf="serverCreated; else noServer">
+  Server was created, server name is {{ serverName }}
+</p>
+<!-- this hashtag is a local reference/marker -->
+<!-- ngtemplate is a directive component shippign with angular which you can use to mark places in the DOM -->
+<ng-template #noServer><p>No server was created!</p></ng-template>
+<app-server *ngFor="let server of servers"></app-server>
+
+<!-- <button (click)="paragraph = !paragraph">Display Details</button> -->
+<button (click)="onToggle()">Display Details</button>
+<p *ngIf="paragraph">{{ paragraphtext }}</p>
+<div
+  *ngFor="let logItem of log; let i = index"
+  [ngStyle]="{ backgroundColor: i >= 4 ? 'blue' : 'red' }"
+  [ngClass]="{ 'white-text': logItem >= 4 }"
+>
+  {{ logItem }}
+</div>
+<!-- we can do the ngstyle here in a method but we can do it like this as well. -->
+
+<!-- added a single quote around whitetext because of the dash -->
